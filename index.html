@@ -231,6 +231,48 @@
             padding-left: 0 !important;
             padding-right: 0 !important;
         }
+        
+        /* Адаптивное модальное окно */
+        .modal-container {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        .modal-content {
+            width: 100%;
+            max-width: 28rem;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 0 auto;
+        }
+        
+        /* Исправления для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .modal-container {
+                padding: 0.5rem;
+            }
+            
+            .modal-content {
+                max-width: 100%;
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            /* Уменьшаем отступы в модальном окне */
+            .modal-content .p-4 {
+                padding: 0.75rem !important;
+            }
+            
+            /* Уменьшаем размеры полей */
+            .modal-content input,
+            .modal-content textarea {
+                font-size: 16px !important; /* Предотвращает зум на iOS */
+                padding: 0.5rem !important;
+            }
+        }
     </style>
     </head>
 <body>
@@ -722,7 +764,7 @@
 
                      {/* Contact Modal */}
                      {showContactModal && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center">
+                        <div className="fixed inset-0 z-50 modal-container">
                             {/* Backdrop */}
                             <div 
                                 className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -730,7 +772,7 @@
                             ></div>
                             
                             {/* Modal */}
-                            <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-md mx-4 p-8 border border-gray-200 dark:border-gray-700">
+                            <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl modal-content p-4 sm:p-6 lg:p-8 border border-gray-200 dark:border-gray-700">
                                 {/* Close button */}
                                 <button
                                      onClick={closeContactModal}
@@ -740,17 +782,17 @@
                                 </button>
 
                                 {/* Header */}
-                                <div className="text-center mb-6">
-                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                                <div className="text-center mb-4 sm:mb-6">
+                                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
                                          Связаться с нами
                                     </h2>
-                                    <p className="text-gray-600 dark:text-gray-400">
+                                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
                                          Отправьте нам сообщение, и мы ответим в ближайшее время
                                     </p>
                                 </div>
 
                                 {/* Form */}
-                                 <form onSubmit={handleContactSubmit} className="space-y-4">
+                                 <form onSubmit={handleContactSubmit} className="space-y-3 sm:space-y-4">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                              Имя *
@@ -759,7 +801,7 @@
                                                 type="text"
                                                 name="name"
                                                 required
-                                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                                                className="w-full px-3 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm sm:text-base"
                                                 placeholder="Ваше имя"
                                             />
                                         </div>
@@ -772,7 +814,7 @@
                                             type="email"
                                             name="email"
                                             required
-                                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                                            className="w-full px-3 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm sm:text-base"
                                             placeholder="your@email.com"
                                         />
                                     </div>
@@ -784,7 +826,7 @@
                                         <input
                                              type="text"
                                              name="subject"
-                                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                                            className="w-full px-3 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm sm:text-base"
                                              placeholder="Тема сообщения"
                                         />
                                     </div>
@@ -796,8 +838,8 @@
                                          <textarea
                                              name="message"
                                                 required
-                                             rows={4}
-                                             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 resize-none"
+                                             rows={3}
+                                             className="w-full px-3 py-2 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 resize-none text-sm sm:text-base"
                                              placeholder="Ваше сообщение..."
                                          ></textarea>
                                         </div>
@@ -805,7 +847,7 @@
                                     {/* Submit button */}
                                     <button
                                         type="submit"
-                                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md mt-6"
+                                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 sm:py-3 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md mt-4 sm:mt-6 text-sm sm:text-base"
                                     >
                                          Отправить
                                     </button>
