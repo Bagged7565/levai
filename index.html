@@ -36,7 +36,83 @@
             },
             darkMode: 'class'
         }
-            </script>
+    </script>
+    <style>
+        /* Исправляем смещение страницы */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
+        /* Исправляем баг с переключателем темы */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .dark .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Исправляем мобильные отступы */
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            
+            /* Исправляем смещение футера */
+            footer {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            
+            /* Центрируем элементы в футере */
+            footer .flex {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            /* Исправляем отступы кнопок */
+            footer button, footer a {
+                margin: 0 4px;
+            }
+        }
+        
+        /* Дополнительные исправления для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .px-4 {
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+            }
+            
+            /* Уменьшаем размеры кнопок */
+            .p-2 {
+                padding: 6px !important;
+            }
+            
+            /* Исправляем размеры иконок */
+            .w-4.h-4 {
+                width: 16px !important;
+                height: 16px !important;
+            }
+        }
+    </style>
     </head>
 <body>
     <div id="root"></div>
@@ -324,7 +400,7 @@
                                     {/* Theme toggle */}
                                     <button
                                         onClick={toggleTheme}
-                                        className="p-2 text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-200"
+                                        className="theme-toggle p-2 text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-all duration-200"
                                         aria-label="Toggle theme"
                                     >
                                         {isDark ? <SunIcon /> : <MoonIcon />}
