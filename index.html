@@ -38,16 +38,25 @@
         }
     </script>
     <style>
-        /* Исправляем смещение страницы */
+        /* Базовые исправления для всех устройств */
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
-        body {
+        html, body {
             margin: 0;
             padding: 0;
             overflow-x: hidden;
             width: 100%;
+            min-height: 100vh;
+        }
+        
+        #root {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         
         /* Исправляем баг с переключателем темы */
@@ -59,6 +68,7 @@
             height: 40px;
             border-radius: 8px;
             transition: all 0.2s ease;
+            flex-shrink: 0;
         }
         
         .theme-toggle:hover {
@@ -69,48 +79,121 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
         
-        /* Исправляем мобильные отступы */
-        @media (max-width: 640px) {
-            .container {
-                padding-left: 16px;
-                padding-right: 16px;
+        /* Адаптивные размеры текста */
+        .responsive-text {
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            line-height: 1.4;
+        }
+        
+        .responsive-heading {
+            font-size: clamp(1.5rem, 6vw, 3rem);
+            line-height: 1.2;
+        }
+        
+        .responsive-large-heading {
+            font-size: clamp(2rem, 8vw, 4rem);
+            line-height: 1.1;
+        }
+        
+        /* Адаптивные отступы */
+        .responsive-padding {
+            padding-left: clamp(1rem, 4vw, 2rem);
+            padding-right: clamp(1rem, 4vw, 2rem);
+        }
+        
+        /* Исправления для мобильных устройств */
+        @media (max-width: 768px) {
+            /* Уменьшаем отступы */
+            .px-4, .px-6, .px-8 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
             }
             
-            /* Исправляем смещение футера */
+            /* Центрируем все элементы */
+            .text-center {
+                text-align: center !important;
+            }
+            
+            /* Исправляем футер */
             footer {
-                padding-left: 16px;
-                padding-right: 16px;
+                padding: 1rem !important;
             }
             
-            /* Центрируем элементы в футере */
             footer .flex {
-                justify-content: center;
-                text-align: center;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                gap: 1rem !important;
             }
             
-            /* Исправляем отступы кнопок */
-            footer button, footer a {
-                margin: 0 4px;
+            /* Исправляем кнопки */
+            button, a {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            /* Исправляем карточки */
+            .grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
             }
         }
         
-        /* Дополнительные исправления для очень маленьких экранов */
+        /* Исправления для очень маленьких экранов */
         @media (max-width: 480px) {
-            .px-4 {
-                padding-left: 12px !important;
-                padding-right: 12px !important;
+            /* Еще меньше отступы */
+            .px-4, .px-6, .px-8 {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
             }
             
             /* Уменьшаем размеры кнопок */
-            .p-2 {
-                padding: 6px !important;
+            .p-2, .p-3, .p-4 {
+                padding: 0.5rem !important;
             }
             
-            /* Исправляем размеры иконок */
-            .w-4.h-4 {
-                width: 16px !important;
-                height: 16px !important;
+            /* Уменьшаем иконки */
+            .w-4, .w-5, .w-6 {
+                width: 1rem !important;
+                height: 1rem !important;
             }
+            
+            /* Исправляем текст */
+            .text-sm, .text-base, .text-lg {
+                font-size: 0.875rem !important;
+            }
+            
+            /* Исправляем заголовки */
+            h1, h2, h3 {
+                font-size: clamp(1.25rem, 5vw, 2rem) !important;
+                line-height: 1.3 !important;
+            }
+        }
+        
+        /* Исправления для больших экранов */
+        @media (min-width: 1024px) {
+            .max-w-4xl {
+                max-width: 72rem !important;
+            }
+            
+            .max-w-7xl {
+                max-width: 80rem !important;
+            }
+        }
+        
+        /* Предотвращаем горизонтальный скролл */
+        .min-h-screen {
+            min-height: 100vh;
+            width: 100%;
+            max-width: 100vw;
+        }
+        
+        /* Исправляем контейнеры */
+        .max-w-7xl, .max-w-4xl {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
     </head>
@@ -411,26 +494,26 @@
                     </header>
 
                     {/* Hero Section */}
-                    <section className="pt-16 sm:pt-20 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8">
+                    <section className="pt-16 sm:pt-20 pb-12 sm:pb-16 responsive-padding">
                         <div className="max-w-4xl mx-auto text-center">
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-black dark:text-white leading-tight mb-4 sm:mb-6 px-2">
+                            <h1 className="responsive-large-heading font-black text-black dark:text-white leading-tight mb-4 sm:mb-6">
                                 Оседлай ИИ - и будь на коне в{' '}
                                 <span className="text-green-500 font-extrabold">сию промреволюцию</span>
                             </h1>
-                            <p className="text-base sm:text-lg md:text-xl font-medium text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto px-2">
+                            <p className="responsive-text font-medium text-gray-700 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
                                 Овладей искусственным интеллектом с персонализированными программами обучения, практическими проектами и экспертным руководством
                             </p>
                         </div>
                     </section>
 
                     {/* Popular Courses Section */}
-                    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+                    <section className="py-12 sm:py-16 responsive-padding bg-gray-50 dark:bg-gray-900">
                         <div className="max-w-7xl mx-auto">
                             <div className="text-center mb-8 sm:mb-12">
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-white mb-3 sm:mb-4 px-2">
+                                <h2 className="responsive-heading font-bold text-black dark:text-white mb-3 sm:mb-4">
                                     Популярные курсы
                                 </h2>
-                                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto px-2">
+                                <p className="responsive-text text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
                                     Начни свой путь в ИИ с наших самых любимых курсов
                                 </p>
                             </div>
@@ -488,7 +571,7 @@
 
                     {/* Footer */}
                     <footer className="bg-gradient-to-r from-gray-900 via-gray-900 to-gray-800 dark:from-black dark:via-black dark:to-gray-900 border-t border-gray-700">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+                        <div className="max-w-7xl mx-auto responsive-padding py-8 sm:py-10">
                             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-6 lg:space-y-0">
                                 {/* Left side - Logo and slogan */}
                                 <div className="flex flex-col space-y-3">
