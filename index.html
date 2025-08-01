@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>LevAI - Оседлай волну ИИ</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -169,6 +169,33 @@
                 font-size: clamp(1.25rem, 5vw, 2rem) !important;
                 line-height: 1.3 !important;
             }
+            
+            /* Дополнительная фиксация для очень маленьких экранов */
+            body {
+                position: fixed !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                overflow: hidden !important;
+            }
+            
+            #root {
+                position: fixed !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+            }
+            
+            /* Предотвращаем любые смещения */
+            * {
+                transform: none !important;
+                transition: none !important;
+            }
+            
+            /* Исключаем анимации для критичных элементов */
+            button, a, input, textarea {
+                transition: none !important;
+            }
         }
         
         /* Исправления для больших экранов */
@@ -194,6 +221,83 @@
             width: 100%;
             margin-left: auto;
             margin-right: auto;
+        }
+        
+        /* Фиксируем интерфейс мобильного сайта */
+        body {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #root {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+        }
+        
+        /* Фиксируем header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            left: 0;
+            right: 0;
+        }
+        
+        /* Предотвращаем смещение элементов */
+        * {
+            transform: translateZ(0); /* Включаем аппаратное ускорение */
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+        
+        /* Фиксируем размеры viewport */
+        @media (max-width: 768px) {
+            html {
+                height: 100%;
+                overflow: hidden;
+            }
+            
+            body {
+                height: 100%;
+                overflow: hidden;
+                position: fixed;
+                width: 100%;
+            }
+            
+            #root {
+                height: 100%;
+                overflow-y: auto;
+                overflow-x: hidden;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+            
+            /* Предотвращаем зум на мобильных */
+            input, textarea, select {
+                font-size: 16px !important;
+            }
+            
+            /* Фиксируем размеры экрана */
+            .min-h-screen {
+                min-height: 100vh;
+                height: 100vh;
+                width: 100vw;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
         }
         
         /* Убираем боковые края - делаем сайт на всю ширину */
