@@ -336,6 +336,19 @@
             padding-right: 0 !important;
         }
         
+        /* Адаптивный логотип льва */
+        .lion-logo {
+            transition: all 0.3s ease;
+        }
+        
+        .lion-logo svg {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+        
+        .dark .lion-logo svg {
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.1));
+        }
+        
         /* Адаптивное модальное окно */
         .modal-container {
             position: fixed;
@@ -372,6 +385,21 @@
                 width: 100%;
                 max-height: calc(100vh - 4rem);
                 margin: 0;
+            }
+        }
+        
+        /* Адаптивность логотипа для разных экранов */
+        @media (max-width: 640px) {
+            .lion-logo {
+                width: 1.75rem !important;
+                height: 1.75rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .lion-logo {
+                width: 1.5rem !important;
+                height: 1.5rem !important;
             }
         }
         
@@ -653,8 +681,50 @@
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex items-center justify-between h-16">
                                 {/* Logo */}
-                                <div className="flex-shrink-0">
-                                    <span className="text-2xl font-black bg-gradient-to-r from-gray-900 to-green-600 dark:from-white dark:to-green-400 bg-clip-text text-transparent">
+                                <div className="flex-shrink-0 flex items-center space-x-2">
+                                    {/* Lion Logo SVG */}
+                                    <div className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 lion-logo">
+                                        <svg viewBox="0 0 100 100" className="w-full h-full" fill="currentColor">
+                                            {/* Lion's mane - outer ring */}
+                                            <path d="M50 10 C30 10, 15 25, 15 45 C15 65, 30 80, 50 80 C70 80, 85 65, 85 45 C85 25, 70 10, 50 10 Z" 
+                                                  className="text-gray-900 dark:text-white"/>
+                                            
+                                            {/* Lion's mane - inner details */}
+                                            <path d="M50 15 C35 15, 22 28, 22 45 C22 62, 35 75, 50 75 C65 75, 78 62, 78 45 C78 28, 65 15, 50 15 Z" 
+                                                  className="text-white dark:text-gray-900"/>
+                                            
+                                            {/* Lion's face */}
+                                            <path d="M50 25 C40 25, 32 33, 32 45 C32 57, 40 65, 50 65 C60 65, 68 57, 68 45 C68 33, 60 25, 50 25 Z" 
+                                                  className="text-gray-900 dark:text-white"/>
+                                            
+                                            {/* Lion's inner face */}
+                                            <path d="M50 30 C43 30, 37 36, 37 45 C37 54, 43 60, 50 60 C57 60, 63 54, 63 45 C63 36, 57 30, 50 30 Z" 
+                                                  className="text-white dark:text-gray-900"/>
+                                            
+                                            {/* Lion's eyes */}
+                                            <circle cx="42" cy="42" r="3" className="text-orange-500"/>
+                                            <circle cx="58" cy="42" r="3" className="text-orange-500"/>
+                                            <circle cx="42" cy="42" r="1.5" className="text-black dark:text-white"/>
+                                            <circle cx="58" cy="42" r="1.5" className="text-black dark:text-white"/>
+                                            <circle cx="41.5" cy="41.5" r="0.5" className="text-white"/>
+                                            <circle cx="57.5" cy="41.5" r="0.5" className="text-white"/>
+                                            
+                                            {/* Lion's nose */}
+                                            <path d="M50 48 L47 52 L53 52 Z" className="text-gray-900 dark:text-white"/>
+                                            
+                                            {/* Lion's mouth */}
+                                            <path d="M47 52 Q50 54 53 52" stroke="currentColor" strokeWidth="1" fill="none" className="text-gray-900 dark:text-white"/>
+                                            
+                                            {/* Lion's whiskers */}
+                                            <circle cx="45" cy="50" r="0.8" className="text-gray-900 dark:text-white"/>
+                                            <circle cx="55" cy="50" r="0.8" className="text-gray-900 dark:text-white"/>
+                                            <circle cx="44" cy="52" r="0.8" className="text-gray-900 dark:text-white"/>
+                                            <circle cx="56" cy="52" r="0.8" className="text-gray-900 dark:text-white"/>
+                                        </svg>
+                                    </div>
+                                    
+                                    {/* Site Title */}
+                                    <span className="text-xl sm:text-2xl font-black bg-gradient-to-r from-gray-900 to-green-600 dark:from-white dark:to-green-400 bg-clip-text text-transparent">
                                         LevAI
                                     </span>
                                 </div>
