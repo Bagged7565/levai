@@ -319,10 +319,21 @@
             padding-right: 0 !important;
         }
         
-        /* Убираем отступы у футера */
-        footer {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
+        /* Добавляем боковые отступы для лучшего восприятия */
+        .max-w-7xl {
+            max-width: 80rem !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        .max-w-4xl {
+            max-width: 56rem !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
         }
         
         /* Центрируем контент внутри */
@@ -330,10 +341,10 @@
             text-align: center !important;
         }
         
-        /* Убираем responsive-padding */
+        /* Адаптивные отступы */
         .responsive-padding {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
         }
         
 
@@ -378,6 +389,23 @@
         }
         
 
+        
+        /* Адаптивные боковые отступы */
+        @media (max-width: 768px) {
+            .max-w-7xl,
+            .max-w-4xl {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .max-w-7xl,
+            .max-w-4xl {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+        }
         
         /* Исправления для очень маленьких экранов */
         @media (max-width: 480px) {
